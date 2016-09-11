@@ -46,6 +46,11 @@ cd edomi-docker
 
 ### build docker container
 
+ **Edit bin/start.sh and change "SERVERIP" to the IP of your DOCKER HOST (not the docker container IP).** Otherwise
+ the communication to you knx router/interface might not work. You have to edit these file in your container under
+ /root/start.sh if your docker host ip has changed. Please be aware that the variable 'global_serverIP' in the edomi.ini
+ will be overwritten after a restart with the configured HOSTIP variable in start.sh.
+
  The Docker file contains all packages needed by edomi. I've added openssh-server and additionally i've set the
  root password to '123456'. You can change it in the Dockerfile.
 
@@ -73,6 +78,12 @@ sudo systemctl enable docker-edomi.service
 ```
 
 ### useful commands
+
+check running / stopped container
+
+```shell
+sudo docker ps -a
+```
 
 stop the container
 

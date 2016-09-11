@@ -1,6 +1,3 @@
-# IP-Adresse des EDOMI-Rechners
-SERVERIP="172.18.0.2"
-
 # EDOMI-Hauptpfad (NICHT ÄNDERN!)
 MAIN_PATH="/usr/local/edomi"
 
@@ -19,8 +16,7 @@ install_config () {
 	cp config/welcome.conf /etc/httpd/conf.d/
 	cp config/httpd.conf /etc/httpd/conf/
 	sed -i -e "s#===INSTALL-HTTP-ROOT===#$MAIN_PATH/www#g" /etc/httpd/conf/httpd.conf
-	sed -i -e "s#===INSTALL-SERVERIP===#$SERVERIP#g" /etc/httpd/conf/httpd.conf
-	
+
 	# PHP
 	cp config/php.conf /etc/httpd/conf.d/
 	cp config/php.ini /etc/
@@ -58,12 +54,6 @@ install_edomi () {
 		tar -xf EDOMI/EDOMI-Public.edomiinstall -C $MAIN_PATH --strip-components=3
 		chmod 777 -R $MAIN_PATH
 	fi
-
-	# edomi.ini anpassen
-	sed -i -e "s#global_serverIP.*#global_serverIP='$SERVERIP'#" $MAIN_PATH/edomi.ini
-	
-	# Autostart: EDOMI
-	echo "sh $MAIN_PATH/main/start.sh" >> /etc/rc.d/rc.local
 }
 
 
