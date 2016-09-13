@@ -2,7 +2,7 @@
 
  This instruction works under docker host <br>CentOS 7</b>. Other distributions need some adjustments.
 
-### install docker
+### 1. install docker
 
 ```shell
 sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
@@ -25,26 +25,33 @@ sudo systemctl enable docker.service
 sudo systemctl start docker.service
 ```
 
-### create a dedicated (new) docker network to assign our container a static ip
+### 2. Build the Edomi Container
+
+You now have two options: build from scratch or pull the ready-made image from Docker hub. 
+
+
+#### 2a Image from Docker hub
 
 ```shell
-sudo docker network create --subnet=172.18.0.0/16 edomi-net
+sudo docker pull pfischi/edomi
 ```
 
-### pull Centos 6.8 docker image
+#### 2b Built it from scratch
+
+##### pull Centos 6.8 docker image
 
 ```shell
 sudo docker pull centos:6.8
 ```
 
-### pull edomi-docker from github
+##### pull edomi-docker from github
 
 ```shell
 git clone https://github.com/pfischi/edomi-docker.git
 cd edomi-docker
 ```
 
-### build docker container
+### 3. Initialize the Edomi Docker container
 
  **Edit bin/start.sh and change "SERVERIP" to the IP of your DOCKER HOST (not the docker container IP).** Otherwise
  the communication to you knx router/interface might not work. You have to edit these file in your container under
@@ -61,7 +68,7 @@ sudo docker build -t edomi .
 ### starting docker container
 
 ```shell
-sudo docker run --name edomi --net edomi-net -p 42900:80 -p 22222:22 -p 50000:50000/udp -p 50001:50001/udp -d edomi
+sudo docker run --name edomi -p 42900:80 -p 22222:22 -p 50000:50000/udp -p 50001:50001/udp -d edomi
 ```
 
 With this configuration the edomi web instance is reachable via http://<docker-host-ip>:42900/admin, the ssh server with 
