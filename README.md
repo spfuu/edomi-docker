@@ -42,7 +42,7 @@ sudo docker pull pfischi/edomi
 ##### pull edomi-docker from github
 
 ```shell
-git clone https://github.com/pfischi/edomi-docker.git
+sudo git clone https://github.com/pfischi/edomi-docker.git
 cd edomi-docker
 ```
 
@@ -50,9 +50,7 @@ cd edomi-docker
 
 ```shell
 sudo docker pull centos:6.8
-sudo docker build -t edomi .
-```
-
+sudo docker build -t pfischi/edomi .
 ```
 
 ### 3. Initialize the Edomi Docker container
@@ -63,17 +61,17 @@ sudo docker build -t edomi .
  will be overwritten after a restart with the configured HOSTIP variable in start.sh.
 
 
-### starting docker container
+### 4. starting docker container
 
 ```shell
-sudo docker run --name edomi -p 42900:80 -p 22222:22 -p 50000:50000/udp -p 50001:50001/udp -d edomi
+sudo docker run --name edomi -p 42900:80 -p 22222:22 -p 50000:50000/udp -p 50001:50001/udp -d pfischi/edomi
 ```
 
 With this configuration the edomi web instance is reachable via http://<docker-host-ip>:42900/admin, the ssh server with 
 ssh -p 22222 <docker-host-ip>. Change this to your needs.
 
 
-### autostart edomi docker conatiner
+### 5. Autostart Edomi Docker container
 
 ```shell
 sudo cp docker-edomi.service /etc/systemd/system/
@@ -82,7 +80,7 @@ sudo systemctl start docker-edomi.service
 sudo systemctl enable docker-edomi.service
 ```
 
-### useful commands
+### 6. Useful commands
 
 check running / stopped container
 
@@ -105,7 +103,7 @@ sudo docker start edomi
 get logs from container
 
 ```shell
-docker logs -f edomi
+sudo docker logs -f edomi
 ```
 
 
