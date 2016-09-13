@@ -28,7 +28,8 @@ sudo systemctl start docker.service
 ### 2. Build the Edomi Container
 
 You now have two options: build from scratch or pull the ready-made image from Docker hub. 
-
+The Image (and the Dockerfile) contains all packages needed by edomi. I've added openssh-server and additionally 
+i've set the root password to '123456'.
 
 #### 2a Image from Docker hub
 
@@ -38,17 +39,20 @@ sudo docker pull pfischi/edomi
 
 #### 2b Built it from scratch
 
-##### pull Centos 6.8 docker image
-
-```shell
-sudo docker pull centos:6.8
-```
-
 ##### pull edomi-docker from github
 
 ```shell
 git clone https://github.com/pfischi/edomi-docker.git
 cd edomi-docker
+```
+
+##### pull Centos 6.8 docker image and build it
+
+```shell
+sudo docker pull centos:6.8
+sudo docker build -t edomi .
+```
+
 ```
 
 ### 3. Initialize the Edomi Docker container
@@ -58,12 +62,6 @@ cd edomi-docker
  /root/start.sh if your docker host ip has changed. Please be aware that the variable 'global_serverIP' in the edomi.ini
  will be overwritten after a restart with the configured HOSTIP variable in start.sh.
 
- The Docker file contains all packages needed by edomi. I've added openssh-server and additionally i've set the
- root password to '123456'. You can change it in the Dockerfile.
-
-```shell
-sudo docker build -t edomi .
-```
 
 ### starting docker container
 
