@@ -14,4 +14,7 @@ service httpd start
 service ntpd start
 service sshd start
 
-/usr/local/edomi/main/start.sh
+/usr/local/edomi/main/start.sh &
+
+trap 'exit 0' SIGTERM
+while true; do :; done
