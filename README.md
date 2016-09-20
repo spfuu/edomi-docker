@@ -1,8 +1,15 @@
 ## edomi-docker (Edomi release: v1.44)
+ 
+ This is a docker implementation for Edomi, a Smarthome framework.
+ For more inforamtion please refer to:
+ 
+ [Official website](http://www.edomi.de/)
+ [Support forum](https://knx-user-forum.de/forum/projektforen/edomi)
 
- This instruction works under docker host <br>CentOS 7</b>. Other distributions need some adjustments.
+ This instruction works for a <b>Centos7</b> docker host. Other distributions need some adjustments.
 
-### 1. install docker
+
+### 1. Install docker
 
 ```shell
 sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
