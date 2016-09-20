@@ -62,13 +62,38 @@ install_extensions () {
 	cp php/bcompiler.ini /etc/php.d/bcompiler.ini
 }
 
+show_splash () {
+	echo -e "\033[32m"
+	echo "--------------------------------------------------------------------------------"
+	echo "                                                                                "
+	echo "        OOOOOOOOOOO  OOOOOOOO        OOOOOOOOO        OOOOOOOOOOOOOO  O         "
+	echo "        O            O       OO    OO         OO    OO     O       O  O         "
+	echo "        O            O         O  O             O  O       O       O  O         "
+	echo "        OOOOOOOO     O         O  O             O  O       O       O  O         "
+	echo "        O            O         O  O             O  O       O       O  O         "
+	echo "        O            O       OO    OO         OO   O       O       O  O         "
+	echo "        OOOOOOOOOOO  OOOOOOOO        OOOOOOOOO     O       O       O  O         "
+	echo "                                                                                "
+	echo "        EDOMI-Installation abgeschlossen      (c) Dr. Christian Gärtner         "
+	echo "                                                                                "
+	echo "--------------------------------------------------------------------------------"
+	echo -e "\033[39m"
+}
 
 # Installationsscript
 
 osversion="$(cat /etc/issue)"
 clear
+echo "================================================================================"
+echo "                                                                                "
+echo "                       EDOMI - (c) Dr. Christian Gärtner                        "
+echo "                                                                                "
+echo "================================================================================"
+echo ""
+
 install_config
 install_mysql
 install_edomi
 install_extensions
+show_splash
 exit
