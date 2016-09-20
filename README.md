@@ -56,7 +56,7 @@ sudo docker build -t pfischi/edomi:latest .
 ### 3. starting docker container
 
 ```shell
-docker run --name edomi -p 42900:80 -p 22222:22 -p 50000:50000/udp -p 50001:50001/udp -e KNXGATEWAY=192.168.178.4 -e KNXACTIVE=true -e HOSTIP=192.168.178.3 -d pfischi/edomi:latest
+sudo docker run --name edomi -p 42900:80 -p 22222:22 -p 50000:50000/udp -p 50001:50001/udp -e KNXGATEWAY=192.168.178.4 -e KNXACTIVE=true -e HOSTIP=192.168.178.3 -d pfischi/edomi:latest
 ```
 
 With this configuration the edomi web instance is reachable via http://<docker-host-ip>:42900/admin, the ssh server with 
