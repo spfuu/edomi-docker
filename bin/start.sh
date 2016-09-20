@@ -5,8 +5,6 @@
 HTTPD_CONF="/etc/httpd/conf/httpd.conf"
 EDOMI_CONF="/usr/local/edomi/edomi.ini"
 
-sed -i -e "s#global_knxGatewayActive=.*#global_knxGatewayActive='$KNXACTIVE'#" $EDOMI_CONF
-
 if [ -z "$HOSTIP" ]; then 
 	echo "HOSTIP not set, using edomi default settings."
 else
