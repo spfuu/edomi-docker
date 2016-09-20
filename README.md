@@ -1,4 +1,4 @@
-# edomi-docker
+## edomi-docker (Edomi release: v1.44)
 
  This instruction works under docker host <br>CentOS 7</b>. Other distributions need some adjustments.
 
@@ -53,25 +53,19 @@ sudo docker pull centos:6.8
 sudo docker build -t pfischi/edomi .
 ```
 
-### 3. Initialize the Edomi Docker container
-
- **Edit bin/start.sh and change "SERVERIP" to the IP of your DOCKER HOST (not the docker container IP).** Otherwise
- the communication to you knx router/interface might not work. You have to edit these file in your container under
- /root/start.sh if your docker host ip has changed. Please be aware that the variable 'global_serverIP' in the edomi.ini
- will be overwritten after a restart with the configured HOSTIP variable in start.sh.
-
-
-### 4. starting docker container
+### 3. starting docker container
 
 ```shell
-sudo docker run --name edomi -p 42900:80 -p 22222:22 -p 50000:50000/udp -p 50001:50001/udp -d pfischi/edomi
+docker run --name edomi -p 42900:80 -p 22222:22 -p 50000:50000/udp -p 50001:50001/udp -e KNXGATEWAY=192.168.178.4 -e KNXACTIVE=true -e HOSTIP=192.168.178.3 -d edomi
 ```
 
 With this configuration the edomi web instance is reachable via http://<docker-host-ip>:42900/admin, the ssh server with 
-ssh -p 22222 <docker-host-ip>. Change this to your needs.
+ssh -p 22222 <docker-host-ip>. With The (optional) parameters KNXGATEWAY, KNXACTIVE and HOSTIP you can preconfigure some settings 
+for edomi. Leave it empty to do this via the Edomi admin webpage. Keep in mind to set "global_serverIP" in Edomi (or via docker run script 'HOSTIP') 
+to your Docker host IP otherwise the KNX communication probably will not work.
 
 
-### 5. Autostart Edomi Docker container
+### 4. Autostart Edomi Docker container
 
 ```shell
 sudo cp docker-edomi.service /etc/systemd/system/
@@ -80,7 +74,7 @@ sudo systemctl start docker-edomi.service
 sudo systemctl enable docker-edomi.service
 ```
 
-### 6. Useful commands
+### 5. Useful commands
 
 check running / stopped container
 
