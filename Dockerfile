@@ -20,7 +20,7 @@ RUN yum -y install \
 ENV EDOMI_TMP_PATH /tmp
 ENV EDOMI_ZIP $EDOMI_TMP_PATH/edomi.zip
 ENV EDOMI_INSTALL_PATH $EDOMI_TMP_PATH/edomi/Install/
-COPY bin/edomi_144.zip $EDOMI_ZIP
+COPY bin/edomi_145.zip $EDOMI_ZIP
 RUN unzip -q $EDOMI_ZIP -d $EDOMI_TMP_PATH
 COPY bin/install.sh $EDOMI_INSTALL_PATH
 RUN cd $EDOMI_INSTALL_PATH && ./install.sh

@@ -1,4 +1,4 @@
-## edomi-docker (Edomi release: v1.44)
+## edomi-docker (Edomi release: v1.45)
  
  This is a docker implementation for Edomi, a Smarthome framework.
  For more inforamtion please refer to:
