@@ -1,7 +1,7 @@
-## edomi-docker (Edomi release: v1.45)
+## edomi-docker (Edomi release: v1.46)
  
- This is a docker implementation for Edomi, a Smarthome framework.
- For more inforamtion please refer to:
+ This is a docker implementation for Edomi, a PHP-based smarthome framework.
+ For more information please refer to:
  
  [Official website](http://www.edomi.de/)
  [Support forum](https://knx-user-forum.de/forum/projektforen/edomi)
@@ -67,9 +67,9 @@ sudo docker run --name edomi -p 42900:80 -p 22222:22 -p 50000:50000/udp -p 50001
 ```
 
 With this configuration the edomi web instance is reachable via http://<docker-host-ip>:42900/admin, the ssh server with 
-ssh -p 22222 <docker-host-ip>. With The (optional) parameters KNXGATEWAY, KNXACTIVE and HOSTIP you can preconfigure some settings 
-for edomi. Leave it empty to do this via the Edomi admin webpage. Keep in mind to set "global_serverIP" in Edomi (or via docker run script 'HOSTIP') 
-to your Docker host IP otherwise the KNX communication probably will not work.
+ssh -p 22222 <docker-host-ip>. With The (optional) parameters KNXGATEWAY, KNXACTIVE and HOSTIP you can pre-configure 
+some settings for Edomi. Leave it empty to do this via the Edomi admin webpage. Keep in mind to set "global_serverIP" 
+in Edomi (or via docker run script 'HOSTIP') to your Docker host IP otherwise the KNX communication probably will not work.
 
 
 ### 4. Autostart Edomi Docker container
