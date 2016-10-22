@@ -63,14 +63,15 @@ sudo docker build -t pfischi/edomi:latest .
 ### 3. starting docker container
 
 ```shell
-sudo docker run --name edomi -p 42900:80 -p 22222:22 -p 50000:50000/udp -p 50001:50001/udp -e KNXGATEWAY=192.168.178.4 -e KNXACTIVE=true -e HOSTIP=192.168.178.3 -d pfischi/edomi:latest
+sudo docker run --name edomi -p 42900:80 -p 42901:443 -p 22222:22 -p 50000:50000/udp -p 50001:50001/udp -e KNXGATEWAY=192.168.178.4 -e KNXACTIVE=true -e HOSTIP=192.168.178.3 -d pfischi/edomi:latest
 ```
 
-With this configuration the edomi web instance is reachable via http://<docker-host-ip>:42900/admin, the ssh server with 
+With this configuration the edomi web instance is reachable via http://<docker-host-ip>:42900/admin and or 
+https://<docker-host-ip>:42901/admin, the ssh server with 
 ssh -p 22222 <docker-host-ip>. With The (optional) parameters KNXGATEWAY, KNXACTIVE and HOSTIP you can pre-configure 
 some settings for Edomi. Leave it empty to do this via the Edomi admin webpage. Keep in mind to set "global_serverIP" 
 in Edomi (or via docker run script 'HOSTIP') to your Docker host IP otherwise the KNX communication probably will not work.
-
+Change http and/or https port to your needs.
 
 ### 4. Autostart Edomi Docker container
 

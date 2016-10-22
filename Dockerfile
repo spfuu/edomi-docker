@@ -15,7 +15,8 @@ RUN yum -y install \
 	php-pear \
 	php-soap \
 	ntp \
-	openssh-server
+	openssh-server \
+	mod_ssl
 
 ENV EDOMI_TMP_PATH /tmp
 ENV EDOMI_ZIP $EDOMI_TMP_PATH/edomi.zip
@@ -27,6 +28,10 @@ RUN cd $EDOMI_INSTALL_PATH && ./install.sh
 
 # set root passwd
 RUN echo -e "123456\n123456" | (passwd --stdin root)
+
+# enable ssl for edomi 
+RUN sed -i -e "\$aLoadModule log_config_module modules/mod_log_config.so" /etc/httpd/conf.d/ssl.conf
+RUN sed -i -e "\$aLoadModule setenvif_module modules/mod_setenvif.so" /etc/httpd/conf.d/ssl.conf
 
 # copy entrypoint script
 ENV START_SCRIPT /root/start.sh

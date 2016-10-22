@@ -4,6 +4,18 @@
 
 HTTPD_CONF="/etc/httpd/conf/httpd.conf"
 EDOMI_CONF="/usr/local/edomi/edomi.ini"
+CSR="/etc/pki/tls/private/edomi.csr"
+CAKEY="/etc/pki/tls/private/edomi.key"
+CACRT="/etc/pki/tls/certs/edomi.crt"
+SSLCONF="/etc/httpd/conf.d/ssl.conf"
+
+if [ ! -f $CSR ] || [ ! -f $CAKEY ] || [ ! -f $CACRT ]; then
+        openssl req -nodes -newkey rsa:2048 -keyout $CAKEY -out $CSR -subj "/C=NZ/ST=Metropolis/L=Metropolis/O=/OU=/CN=edomi"
+	openssl x509 -req -days 3650 -in $CSR -signkey $CAKEY -out $CACRT
+
+	sed -i -e "s#^SSLCertificateFile.*$#SSLCertificateFile $CACRT#g" $SSLCONF
+	sed -i -e "s#^SSLCertificateKeyFile.*$#SSLCertificateKeyFile $CAKEY#g" $SSLCONF
+fi
 
 if [ -z "$HOSTIP" ]; then 
 	echo "HOSTIP not set, using edomi default settings."
